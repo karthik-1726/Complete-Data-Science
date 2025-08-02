@@ -1,0 +1,65 @@
+git --version
+
+
+# Configuring Git User Information
+--> git config --global user.name "user_name"
+--> git config --global user.email "email"
+
+
+# Verify git user configuration
+--> git config --global user.name
+--> git config --global user.email
+
+
+# Initializing a Git Repository
+--> git init
+
+# Track Files
+--> git status
+
+# Adding Files
+--> git add file
+or
+--> git add .
+
+# Commit Files
+--> git commit -m "commit message"                #commit moves changes to the staging environment
+
+# Branch Management
+--> git branch
+--> git branch -m main                       # Rename master branch to main
+
+# Connecting Local to Remote Repository
+--> git remote add origin <repository-url>
+
+# check remote connection
+--> git remote -v
+
+
+# Push code to GitHub
+--> git push -u origin main
+or 
+--> git push origin main
+
+
+# Modifying and Restoring Files
+If you modify a file, Git will show it as modified. You can add the file again to stage the changes, or restore it to the previous version if needed.
+
+--> git restore file_name
+
+
+# Cloning an Existing Repository
+--> git clone <repository-url>
+
+# Committing and pushing after cloning
+--> git add .
+--> git commit -m "commit message"
+--> git push origin main
+
+
+
+
+
+
+
+
