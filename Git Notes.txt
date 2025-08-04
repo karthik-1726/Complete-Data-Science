@@ -58,6 +58,97 @@ If you modify a file, Git will show it as modified. You can add the file again t
 
 
 
+# Unstaging Files
+This command removes the file from the staging area, making it untracked again.
+
+--> git restore --staged file_name
+or
+git reset file_name (for add . changes)
+
+
+reset for on head commit
+--> git reset HEAD~1 (for one commit) -- uncommit stage just added
+
+reset commit for many changes 
+--> git reset <hash of the commit>
+or
+--> git reset --hard<hash>       (to make the changes in the vs code)
+
+
+
+
+
+# Viewing Differnence
+Shows differences between the staged files and the last commit
+
+--> git diff --staged
+
+
+** The git commit command takes a snapshot of your staged changes and moves it to the staging area. This snapshot can then be pushed to the main GitHub repository. Think of the staging area as a playground where changes are prepared before being finalized in the remote repository.**
+
+
+# Branching and Merging
+
+View existing branch
+--> git branch
+
+Create new branch
+--> git branch new_branch
+
+Switch to new branch
+--> git checkout new_branch
+
+Delete any branch
+--> git branch -b branch-name	
+
+
+# Merging branches
+
+First switch to main branch
+
+--> git checkout main
+
+--> git merge new_branch
+
+--> git push origin main
+
+
+
+**** Example:
+--> git branch
+--> git branch developer
+--> git checkout developer
+Any work or commits you make will be on the developer branch. For example, after creating a new file, you can add and commit it to this branch.
+--> git add .
+--> git commit -m "commit on branch developer"
+
+# merge developer to main branch
+--> git checkout main
+--> git merge developer
+--> git push origin main
+
+
+
+# Viewing Commit History 
+--> git log
+
+to view the last three commit with the patch history
+--> git log -p -3
+
+Press Q to exit the log view
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
