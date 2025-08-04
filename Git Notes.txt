@@ -136,21 +136,3 @@ to view the last three commit with the patch history
 --> git log -p -3
 
 Press Q to exit the log view
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
