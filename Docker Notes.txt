@@ -1,0 +1,55 @@
+* Problem without the docker
+
+Suppose a developer is working on a Windows machine and starts developing a data science application. To begin, the developer installs various dependencies such as Anaconda, different libraries, MySQL, or MongoDB, depending on the database requirements. All these installations are performed manually.
+
+If another developer joins the team and uses a different operating system, such as Linux, Mac, or Windows, they must repeat the entire installation process to set up their development environment. Due to library or dependency mismatches, the application developed by the first developer may not work on the second developer's machine. Even if the first developer assists the second in setting up the environment, similar issues can arise when moving the application to the QA environment, where another team might miss some installations or configurations. As a result, the application or some modules may not work, leading to conflicts between the development and QA teams.
+
+
+* What are Containers?
+
+Containers provide a solution to these problems. A container is a way to package an application with all the necessary dependencies and configurations. Once packaged, the container becomes a portable artifact, meaning it can be easily shared and moved to any environment. This ensures that the application will run the same way regardless of where it is deployed.
+
+
+* How containers work in development?
+
+When developing an application, all required dependencies, such as specific Python versions or tools, are included in the container as base images and multiple layers. This container can then be run in the QA environment or production environment exactly as it was in development, ensuring consistency and eliminating dependency issues.
+
+
+* Introduction to Docker
+
+Docker is an open platform for developing, shipping, and running applications. It enables the creation and management of containers, allowing applications to be packaged and moved across different environments efficiently. Docker separates applications from infrastructure, enabling faster software delivery and consistent management of both infrastructure and applications.
+
+
+* Example: Moving Houses Analogy
+
+Consider the process of moving from one house to another. In House A, you have various items such as furniture, TV, washing machine, kitchen utensils, and clothes. Instead of moving each item separately and risking forgetting something, you pack everything into a container. This container is then transported to House B, where you unpack it and set up your new home. Similarly, in software development, all dependencies and configurations are packaged into a container, which can then be moved and run in any environment without missing components.
+
+
+## Layers of Docker Images
+
+When creating a container, we build it from multiple layers of images. For example, the base image could be a Linux distribution, which is typically very small in size. There are different versions of Linux available that can serve as the base image.
+
+On top of this base image, we can add other images representing dependencies such as MySQL or MongoDB. Each of these dependencies is added as a separate image layer.
+
+In summary, a container is a combination of these layered images.
+
+Linux base image (small size)
+Dependency images like MongoDB
+Additional layers such as Python 3.7 installation
+Further layers like Anaconda installation
+These layers collectively form the container, encapsulating all dependencies and configurations.
+
+
+* Difference Between Docker Image and Container
+
+Docker Image: This is the combined set of all image layers representing the application and its dependencies. It is a static artifact or package that can be moved or shared across different environments.
+
+Container: When you run a Docker image, it creates a container. The container is a running environment where the application executes. It includes all the dependencies installed within this environment, ensuring the application runs consistently.
+
+When you run a Docker image, the process involves:
+
+Creating a container (an isolated environment).
+Installing all dependencies inside this container.
+Starting the application within this environment.
+Thus, the container is the live instance of the Docker image.
+
