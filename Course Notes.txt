@@ -1,5 +1,29 @@
 ## create a environment
+	## create a environment
 	conda create -p venv pyhton==3.12
+
+
+## Active the environment
+	conda active venv/
+
+
+
+## Different ways of creating virtual environment 
+
+1. Using Python command:
+	python -m venv myenv
+	myenv\Scripts\activate
+	deactivate
+
+2. For Linux Command:
+	pip install virtualenv
+	virtualenv -p python virtual_env(name)
+	virtual_env\Scipts\activate
+	deactivate
+
+3. using conda:
+	conda create -p venv1(name) python==3.10 -y
+	conda activate ven1/
 
 
 ## Active the environment
