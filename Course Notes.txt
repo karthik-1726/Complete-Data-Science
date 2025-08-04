@@ -11,7 +11,7 @@
 ## Different ways of creating virtual environment 
 
 1. Using Python command:
-	python -m venv myenv
+	python -m venv .myenv
 	myenv\Scripts\activate
 	deactivate
 
