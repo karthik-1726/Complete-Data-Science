@@ -53,3 +53,178 @@ Installing all dependencies inside this container.
 Starting the application within this environment.
 Thus, the container is the live instance of the Docker image.
 
+
+* Operating system Architecture
+
+To understand virtualization, we first need to comprehend the structure of an operating system. Consider an operating system such as Linux, Windows, or Mac. At the base, there is the hardware, which includes components like the CPU and RAM. On top of the hardware lies the OS kernel, which is responsible for communicating with the hardware. This forms the first layer.
+
+Above the OS kernel is the application layer, which constitutes the second layer. This layered structure is common across different operating systems.
+
+
+* Virtualization Layers: Docker vs Virtual Machines
+
+-- Docker virtualizes only the application layer. Docker images communicate directly with the host OS kernel.
+
+-- Virtual Machines (VMs) virtualize both the application layer and the OS kernel layer. When a VM is installed, it includes its own application layer and OS kernel, making it a complete separate subsystem within the host OS.
+
+This means that while Docker containers share the host OS kernel, VMs operate with their own kernel, which also communicates with the hardware. Consequently, when installing VMs, you must allocate system resources such as hard disk space and RAM specifically for the VM.
+
+
+
+* Advantages and disadvantages
+
+Docker Advantages:
+-- Since Docker virtualizes only the application layer, Docker image sizes are usually smaller, often measured in megabytes.
+-- Docker containers start and run much faster compared to VMs because they do not require booting a separate OS kernel.
+
+VM Characteristics:
+-- VMs virtualize both the application layer and the OS kernel, resulting in larger image sizes, often in gigabytes.
+-- VMs are comparatively slower to start and run due to the overhead of booting their own OS kernel.
+
+
+
+* Compatibility Considerations:
+
+-- Virtual Machines: VMs can be installed on any operating system without compatibility issues. This is an important point often discussed in interviews.
+
+-- Docker: Docker images may face compatibility issues depending on the host OS kernel. For example, a Windows machine cannot run Linux Docker images unless the OS kernel supports it.
+
+
+
+## Docker Commands
+
+# Verify Docker Installation (open cmd)
+--> docker
+
+# Check docker version
+--> docker -v
+
+
+# Exploring Docker Hub and Searching for Images:
+
+First, go to Docker Hub. You do not have to log in to search for public repositories or images. You can search for many public images present inside Docker Hub. For this demonstration, we will use the docker/getting-started image, which is an official Docker image with over 10 million downloads. This image is a perfect way to start learning Docker. You can download this image and run it within your local machine as a container.
+
+# Pulling a docker image:
+--> docker pull docker/getting-started
+
+# verifying the docker images
+--> docker images
+
+# Running a docker container:
+--> docker run -d -p 80:80 docker/getting-started
+
+⦁	docker run: Used to run the Docker image.
+⦁	-d: Runs the image as a container in detached mode (in the background).
+⦁	-p: Assigns and maps a port from the host to the container.
+⦁	80:80: Maps port 80 of the host to port 80 of the container.
+⦁	docker/getting-started: The image name to run as a container.
+
+Running in detached mode allows you to continue using the command prompt for other commands. The -p option maps the host port to the container port, enabling access to the application running inside the container from your host machine.
+
+
+# When you run a Docker image, it creates a container environment inside your host machine (e.g., Windows). The host environment and container environment are separate. The mapping 80:80 means that port 80 on your host communicates with port 80 on the container. This allows you to access the application running in the container from your host machine using localhost:80 or 127.0.0.1:80.
+
+
+# Checking running containers:
+--> docker ps
+
+
+# Stopping container:
+--> docker stop <container_id>
+
+
+# Removing docker image:
+--> docker image rm <image_id>
+or
+--> docker image rm -f <image_id>    (force remove)
+
+
+# IMP:
+You can run multiple containers on the same container port if you use different host ports. For example, you can map host port 5000 to container port 80 for one container, and host port 80 to container port 80 for another. The host port can be configured based on availability. (Container port can be same but host port should be different)
+
+
+
+
+⦁	Creating a docker image
+
+# Running a Simple Flask Application
+
+A simple Flask application is developed that returns 'Hello World.' The application consists of two files: app.py and requirements.txt. The application is run using Python, and it is confirmed to be running on 127.0.0.1 with port 5000. The output 'Hello World' is displayed in the browser.
+
+# Modifying Flask App for Dockerization
+
+To prepare the Flask application for Dockerization, the app.run() method is updated to specify the host as 0.0.0.0 and the port as 5000. This change allows the application to be accessible from both the local IP address and localhost.
+
+# Example: Setting Host and Port in Flask
+
+	python Code Sample:
+	app.run(host='0.0.0.0', port=5000)
+After making these changes, the application is tested using the local IP address, 127.0.0.1, and localhost, all of which display 'Hello World.' This demonstrates the importance of using 0.0.0.0 as the host in containerized environments.
+
+
+# Creating the Dockerfile:
+
+To create a Docker image, a Dockerfile is written using Visual Studio. The Dockerfile uses several important commands:
+
+⦁	FROM: Specifies the base image, such as python:3.8-alpine.
+⦁	COPY: Copies files from the local repository into the image.
+⦁	WORKDIR: Sets the working directory inside the image.
+⦁	RUN: Installs dependencies.
+⦁	CMD: Specifies the command to run the application.
+
+
+Code:
+		FROM python:3.8-alpine
+		COPY . /app                    #all the files are copied to app folder
+		WORKDIR /app                   # switch the working directory to this app folder
+		RUN pip install -r requirements.txt        
+		CMD ["python", "app.py"]
+
+--- The COPY command ensures all files are placed in the /app folder inside the image. The WORKDIR sets the working directory to /app. The RUN command installs all dependencies listed in requirements.txt. The CMD command runs the Flask application.---
+
+
+
+# Building the docker image:
+
+Once the docker file is ready run this command 
+--> docker build -t welcome-app .                 # (welcome-app is image name)
+
+
+--> docker images
+
+# Running docker image as container;
+--> docker run -p 5000:5000 welcome-app
+
+
+# Verifying Running Containers and Stopping Them
+--> docker ps
+--> docker stop <conatiner_id>
+
+
+
+# Push docker image to docker hub:
+
+-- log in to your Docker Hub account. It is important to remember your username and password for this process.
+
+--> docker login 
+(After running the login command, you will be prompted for your username and password. If already logged in, Docker will use the existing credentials.)
+
+
+# IMP
+Suppose the current Docker image is named welcome_app. To push it to Docker Hub, it must be tagged with your Docker Hub username.
+
+# Tagging the docker image
+--> docker tag welcome_app krishna06/welcome_app:latest
+(docker tag 'app name use while building' 'tag your user name to the app name')
+
+--> docker images   (verify the images)
+
+
+# Pushing the docker to docker hub
+--> docker push krishna06/welcome_app:latest
+
+
+# Pulling and running the image (Like we have done earlier to test)
+--> docker pull krishna06/welcome_app:latest
+--> docker run -d -p 5000:5000 krishna06/welcome_app:latest
+
