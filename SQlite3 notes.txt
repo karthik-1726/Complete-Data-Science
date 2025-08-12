@@ -1,0 +1,93 @@
+SQLite 3 
+
+-- Importing SQLite3 in python
+> import sqlite3
+
+-- Creating and connecting to a database
+> connection = sqlite3.connect('example.db')
+
+-- Creating a cursor object
+Required to iterate through the tables and rows
+> cursor = connection.cursor()
+
+
+-- Creating a Table in SQLite
+> cursor.execute('''
+CREATE TABLE IF NOT EXISTS employees (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER,
+    department TEXT
+)''')
+
+
+After creating the table commit the changes to save them
+> connection.commit()
+
+
+-- Insert the data into table
+> cursor.execute("INSERT INTO employees (name, age, department) VALUES ('Krish', 32, 'Data Scientist')")
+  cursor.execute("INSERT INTO employees (name, age, department) VALUES ('Bob', 25, 'Engineering')")
+  cursor.execute("INSERT INTO employees (name, age, department) VALUES ('Charlie', 35, 'Finance')")
+  connection.commit()
+
+
+-- Querying data from the table
+> cursor.execute('SELECT * FROM employees')
+  rows = cursor.fetchall()
+  for row in rows:
+      print(row)
+
+
+-- Updating the data in the table
+> cursor.execute("UPDATE employee SET age=34 WHERE name="Krish"")
+  connection.commit()
+
+
+-- Deleting the data from the table
+> cursor.execute("DELETE FROM employee WHERE name='Bob'")
+  connection.commit()
+ 
+
+
+
+EXAMPLE: WORKING WITH SALES DATA
+
+> connection = sqlite3.connect('sales_data.db')
+> cursor = connection.cursor()
+
+> cursor.execute('''
+ CREATE TABLE IF NOT EXISTS sales (
+     id INTEGER PRIMARY KEY,
+     date TEXT NOT NULL,
+     product TEXT NOT NULL,
+     sales INTEGER,
+     region TEXT
+ )''')
+ 
+
+-- Bulk insertion of the sales data 
+>
+sales_data = [
+    ('2023-01-01', 'ProductA', 100, 'North'),
+    ('2023-01-02', 'ProductB', 150, 'South'),
+    ('2023-01-03', 'ProductC', 200, 'East'),
+    ('2023-01-04', 'ProductD', 250, 'West')
+]
+cursor.executemany(
+    'INSERT INTO sales (date, product, sales, region) VALUES (?, ?, ?, ?)',
+    sales_data
+)
+connection.commit()
+
+
+-- Querying the sales data
+> cursor.execute('SELECT * FROM sales')
+  rows = cursor.fetchall()
+  for row in rows:
+      print(row)
+
+
+-- Closing the database connection
+> connection.close()
+
