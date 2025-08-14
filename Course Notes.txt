@@ -1,3 +1,5 @@
+-------- Environemnt Creation --------
+
 ## create a environment
 	## create a environment
 	conda create -p venv pyhton==3.12
@@ -49,3 +51,113 @@
 	conda activate ven1/
 
 
+
+
+----- Logging in Python -----
+
+
+--> Logging is a crucial aspect of any application, providing ways to track events, errors, and operational information
+
+
+import logging
+
+--> Configuring Basic Logging Settings
+To start logging, you first need to configure the basic logging settings using the basicConfig function. This includes setting the log level, which controls the severity of messages to be logged. Common levels include DEBUG, INFO, WARNING, ERROR, and CRITICAL.
+
+
+logging.basicConfig(level=logging.DEBUG)
+
+
+--> Logging Messages with Different Severity Levels
+
+You can log messages at different severity levels:
+logging.debug() for detailed diagnostic information.
+logging.info() for confirmation that things are working as expected.
+logging.warning() to indicate something unexpected happened or a potential problem.
+logging.error() for serious problems preventing some functionality.
+logging.critical() for very serious errors that may prevent the program from continuing.
+
+
+logging.debug('This is a debug message')
+logging.info('This is an info message')
+logging.warning('This is a warning message')
+logging.error('This is an error message')
+logging.critical('This is a critical message')
+
+
+--> Understanding Logging Levels
+
+The logging levels indicate the severity of events:
+DEBUG: Detailed information, typically useful for diagnosing problems.
+INFO: Confirmation that things are working as expected.
+WARNING: An indication that something unexpected happened or may cause problems in the future.
+ERROR: A serious problem that prevented some functionality.
+CRITICAL: A very serious error indicating the program may not be able to continue running.
+
+
+--> Customizing Log Message Format
+You can customize the format of log messages using the format parameter in basicConfig. Common format specifiers include:
+
+%(asctime)s: Timestamp of the log message.
+%(name)s: Name of the logger.
+%(levelname)s: Log level name.
+%(message)s: The log message itself.
+
+Example configuration:
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s %(name)s %(levelname)s %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
+
+--> Logging to a File
+Instead of printing logs to the console, you can save them to a file by specifying the filename and filemode parameters in basicConfig. For example, to write logs to app.log in write mode:
+
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s %(name)s %(levelname)s %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    filename='app.log',
+    filemode='w'
+)
+
+
+--> Important Note on Reconfiguring Logging
+Once the logging configuration is set using basicConfig, it cannot be changed without restarting the Python interpreter or kernel. To apply new logging configurations, restart your environment before re-running the configuration code.
+
+--> Creating a Centralized Logger Module
+You can create a dedicated logger configuration file, for example logger.py, to centralize logging setup. This module can then be imported into other scripts to maintain consistent logging behavior across your project.
+
+
+# logger.py
+import logging
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s %(name)s %(levelname)s %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    filename='logs/app.log',
+    filemode='w'
+)
+
+
+--> Using the Logger in Another Script
+In another Python file, you can import the logging module from your logger configuration and use it to log messages. For example:
+
+
+from logger import logging
+
+def add(a, b):
+    logging.debug('The addition operation is taking place')
+    return a + b
+
+logging.debug('Addition function is called')
+
+result = add(10, 15)
+
+
+--> Running the Script and Checking Logs
+Run your script from the terminal ensuring you are in the correct directory. The log messages will be saved in the specified log file, such as logs/app.log. This file will contain timestamps, log levels, and messages, helping you trace the execution flow and debug issues.
