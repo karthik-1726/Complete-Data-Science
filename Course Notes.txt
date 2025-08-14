@@ -161,3 +161,41 @@ result = add(10, 15)
 
 --> Running the Script and Checking Logs
 Run your script from the terminal ensuring you are in the correct directory. The log messages will be saved in the specified log file, such as logs/app.log. This file will contain timestamps, log levels, and messages, helping you trace the execution flow and debug issues.
+
+
+
+--> Logging With Multiple Loggers
+
+--> Creating Multiple Loggers
+Multiple loggers can be created from different parts of an application. For example, one can create a logger specifically for module one.
+
+
+import logging
+
+logger1 = logging.getLogger('module1')
+logger1.setLevel(logging.DEBUG)
+Logger for Module Two
+
+Similarly, a logger can be created for module two.
+
+
+logger2 = logging.getLogger('module2')
+logger2.setLevel(logging.WARNING)
+
+Basic Configuration for Logging
+The basic configuration for logging settings includes the type of message to display and the date format. It is important to note that logging levels such as DEBUG and WARNING must be in uppercase.
+
+
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+
+
+--> Logging Messages with Different Loggers
+Messages can be logged using the specific loggers created for each module.
+
+
+logger1.debug('This is a debug message for logger one')
+logger2.warning('This is a warning message for module two')
+logger2.error('This is an error message')
+
+--> Understanding Logger Output
+By using different loggers for each module, messages can be seen clearly and easily. Previously, logs would default to the root logger, but by defining specific modules, one can specify module one or module two based on the implementation.
