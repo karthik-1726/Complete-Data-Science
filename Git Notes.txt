@@ -1,3 +1,63 @@
+Important Questions:
+
+What is difference between the Centralized and Distributed Version Control?
+
+CSV and SVN are Centralized Version Control
+Git is centralized version control
+
+Feature	Centralized (CVCS)	Distributed (DVCS)
+Repository Location	Single central server	Every developer has a full copy
+Work Offline?	No	Yes
+Server Dependency	High (server = bottleneck)	Low (everyone has backup)
+Speed	Slower (depends on server)	Faster (local commits)
+Example Tools	SVN, CVS	Git, Mercurial
+
+
+Drawbacks of Centralized Version Control:
+
+	1. Singl Point of failure:  The central server is the only source of truth. If it goes down, no one can commit or collaborate.
+	2. Requires Continuous Network Connection: Developers must always be connected to the central server to commit or view history. Offline work is not possible
+
+
+What is Fork?
+Fork means creating a personal copy of someone else’s repository under your own account.
+• Experiment freely (without affecting the original repo).
+• Make changes or add features.
+• Later, if you want, you can send a pull request to propose merging your changes back into the original repo.
+
+
+
+## Git Branching Strategy 
+
+ 1. main / master branch: 
+• The main branch of your project.
+• It always contains production-ready, stable code.
+• Traditionally called master, but now most repos use main for inclusivity.
+• Direct commits to this branch are usually restricted (to prevent breaking production
+
+	2. Feature Branch:
+• A branch created from master/main to develop a new feature or fix a bug.
+• Developers work on feature branches independently without affecting stable code.
+• After testing, the branch is merged back into master (via pull request).
+
+	3. Release branch:
+• A branch created when you’re preparing a new release of the software.
+• Used for final testing, bug fixing, and polishing before release.
+• No new features are added here — only stability fixes.
+• After testing, it’s merged into:
+	• master (for production)
+	• develop (to keep changes in sync if using Gitflow model)
+
+
+
+Difference between git clone and git fork
+• Git Fork → makes a copy of someone else’s repo on your GitHub account (remote).
+• Git Clone → makes a local copy of a repo on your computer.
+
+
+## Commands
+
+# check git version
 git --version
 
 
@@ -100,6 +160,9 @@ Switch to new branch
 
 Delete any branch
 --> git branch -b branch-name	
+
+Create new branch and switch to it 
+--> git checkout -b branch-name
 
 
 # Merging branches
