@@ -55,6 +55,11 @@ Difference between git clone and git fork
 • Git Clone → makes a local copy of a repo on your computer.
 
 
+Difference between git merge and git rebase
+• Git merge → Combines two branches’ histories by creating a new commit (keeps the original history intact).
+Git rebase → Moves or "replays" commits from one branch onto another, creating a linear history (rewrites commit history).
+
+
 ## Commands
 
 # check git version
