@@ -33,7 +33,7 @@ Fork means creating a personal copy of someone else’s repository under your ow
 • The main branch of your project.
 • It always contains production-ready, stable code.
 • Traditionally called master, but now most repos use main for inclusivity.
-• Direct commits to this branch are usually restricted (to prevent breaking production
+• Direct commits to this branch are usually restricted (to prevent breaking production)
 
 	2. Feature Branch:
 • A branch created from master/main to develop a new feature or fix a bug.
